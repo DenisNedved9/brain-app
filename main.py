@@ -15,3 +15,4 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"status": "Python backend is online!"}
+
