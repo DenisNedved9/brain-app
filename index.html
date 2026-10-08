@@ -4,30 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BrainApp</title>
-  <style>
-    body { 
-      background-color: #0f172a; 
-      color: #f8fafc; 
-      font-family: system-ui, -apple-system, sans-serif; 
-      text-align: center; 
-      padding: 50px; 
-    }
-    h1 { color: #38bdf8; font-size: 2.5rem; }
-    p { color: #94a3b8; font-size: 1.2rem; }
-    button { 
-      background: #38bdf8; 
-      color: #0f172a; 
-      border: none; 
-      padding: 16px 24px; 
-      font-weight: bold; 
-      font-size: 1rem;
-      border-radius: 8px; 
-      cursor: pointer; 
-      transition: background 0.2s;
-      margin: 5px;
-    }
-    button:hover { background: #7dd3fc; }
-  </style>
+
+  <link rel="stylesheet" href="style.css"> <!-- css -->
+
 </head>
 <body>
 
@@ -44,75 +23,69 @@
     <hr>
     <h1>6.Třída</h1>
     <p> 
-      <button onclick="nacist_otazky_6_pocty()">Počítání + , - , ˙ , :</button>
-      <button onclick="nacist_otazky_6_pocty()">Desetinná čísla</button>
-      <button onclick="nacist_otazky_6_pocty()">Dělitelnost přirozených čísel</button>
-      <button onclick="nacist_otazky_6_pocty()">Počítání úhlů</button> 
-      <button onclick="nacist_otazky_6_pocty()">Převody jednotek</button>
-      <button onclick="nacist_otazky_6_pocty()">Čtverec a obdélník</button>
-      <button onclick="nacist_otazky_6_pocty()">Kvádr a krychle</button>
+      <button onclick="vyber_test_cviceni('pocitani')">Počítání + , - , ˙ , :</button>
+      <button onclick="vyber_test_cviceni('desetina_cisla')">Desetinná čísla</button>
+      <button onclick="vyber_test_cviceni('delitelnost')">Dělitelnost přirozených čísel</button>
+      <button onclick="vyber_test_cviceni('uhly')">Počítání úhlů</button> 
+      <button onclick="vyber_test_cviceni()">Převody jednotek</button>
+      <button onclick="vyber_test_cviceni()">Čtverec a obdélník</button>
+      <button onclick="vyber_test_cviceni()">Kvádr a krychle</button>
     </p>
 
     <h1>7.Třída</h1>
     <p> 
-      <button onclick="nacist_otazky_6_pocty()">Zlomky</button>
-      <button onclick="nacist_otazky_6_pocty()">Celá čísla</button>
-      <button onclick="nacist_otazky_6_pocty()">Racionální čísla</button>
-      <button onclick="nacist_otazky_6_pocty()">Poměr</button> 
-      <button onclick="nacist_otazky_6_pocty()">Měřítko</button>
-      <button onclick="nacist_otazky_6_pocty()">Trojčlenka</button>
-      <button onclick="nacist_otazky_6_pocty()">Procenta</button>
-      <button onclick="nacist_otazky_6_pocty()">Čtyřúhelníky</button>
+      <button onclick="vyber_test_cviceni()">Zlomky</button>
+      <button onclick="vyber_test_cviceni()">Celá čísla</button>
+      <button onclick="vyber_test_cviceni()">Racionální čísla</button>
+      <button onclick="vyber_test_cviceni()">Poměr</button> 
+      <button onclick="vyber_test_cviceni()">Měřítko</button>
+      <button onclick="vyber_test_cviceni()">Trojčlenka</button>
+      <button onclick="vyber_test_cviceni()">Procenta</button>
+      <button onclick="vyber_test_cviceni()">Čtyřúhelníky</button>
     </p>
 
     <h1>8.Třída</h1>
     <p> 
-      <button onclick="nacist_otazky_6_pocty()">Hranoly</button>
-      <button onclick="nacist_otazky_6_pocty()">Mocniny, odmocniny</button>
-      <button onclick="nacist_otazky_6_pocty()">Pythagorova věta</button>
-      <button onclick="nacist_otazky_6_pocty()">Kruh a kružnice</button> 
-      <button onclick="nacist_otazky_6_pocty()">Válec</button>
-      <button onclick="nacist_otazky_6_pocty()">Výrazy</button>
-      <button onclick="nacist_otazky_6_pocty()">Lineární rovnice</button>
-      <button onclick="nacist_otazky_6_pocty()">Statistika</button>
+      <button onclick="vyber_test_cviceni()">Hranoly</button>
+      <button onclick="vyber_test_cviceni()">Mocniny, odmocniny</button>
+      <button onclick="vyber_test_cviceni()">Pythagorova věta</button>
+      <button onclick="vyber_test_cviceni()">Kruh a kružnice</button> 
+      <button onclick="vyber_test_cviceni()">Válec</button>
+      <button onclick="vyber_test_cviceni()">Výrazy</button>
+      <button onclick="vyber_test_cviceni()">Lineární rovnice</button>
+      <button onclick="vyber_test_cviceni()">Statistika</button>
     </p>
 
     <h1>9.Třída</h1>
     <p> 
-      <button onclick="nacist_otazky_6_pocty()">Jehlan, kužel, koule</button>
-      <button onclick="nacist_otazky_6_pocty()">Soustavy lineárních rovnic</button>
-      <button onclick="nacist_otazky_6_pocty()">Rovnice s neznámou ve jmenovateli</button> 
-      <button onclick="nacist_otazky_6_pocty()">Finanční matematika</button>
-      <button onclick="nacist_otazky_6_pocty()">Lomené výrazy</button>
+      <button onclick="vyber_test_cviceni()">Jehlan, kužel, koule</button>
+      <button onclick="vyber_test_cviceni()">Soustavy lineárních rovnic</button>
+      <button onclick="vyber_test_cviceni()">Rovnice s neznámou ve jmenovateli</button> 
+      <button onclick="vyber_test_cviceni()">Finanční matematika</button>
+      <button onclick="vyber_test_cviceni()">Lomené výrazy</button>
     </p>
    
     
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   </div>
 
+  <div id="cviceni" style="display: none;">
+    <h1 id="the_title"></h1>
+    <button onclick="generuj_priklad('druh_cviceni')">Cvičení</button>
+
+
+  </div>
+
+  <div id="generovani" style="display: none;">
+    <h2>Vypočítej příklad.</h2>
+    <br>
+    <h1 id="priklad"></h1>
+  </div>
+
   
-  <script> // javascript
-    
-    const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
-    // Až budeš chtít web nahrát živě, přepneš to na:
-    //https://brain-app-nikp.onrender.com
+ 
+  <script src="script.js"></script> <!-- javascript -->
 
-    // Přepínání obrazovek
-    function otevri_matika() {
-      document.getElementById("hlavni_menu").style.display = "none";
-      document.getElementById("matika").style.display = "block";
-    }
-
-    function jdi_zpet_hlavni_menu() {
-      document.getElementById("matika").style.display = "none";
-      document.getElementById("hlavni_menu").style.display = "block";
-    }
-    function jdi_zpet_menu_trid(){
-      document.getElementById("hlavni_menu").style.display = "none";
-      document.getElementById("matika").style.display = "block";
-    }
-
-  </script>
 
 </body>
 </html>

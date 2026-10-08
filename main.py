@@ -7,12 +7,14 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-@app.get("/6.třída")
-def read_root():
-    return {"status": "Python backend is online!"}
-
+@app.get("/priklad?typ=pocitani")
+def ziskej_priklad():
+    priklad = 4
+    priklad = str(priklad)
+    return priklad
