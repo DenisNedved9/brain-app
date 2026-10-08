@@ -12,7 +12,7 @@ app.add_middleware(
 )
 
 
-@app.get("/")
+@app.get("/6.třída+-")
 def read_root():
     return {"status": "Python backend is online!"}
 

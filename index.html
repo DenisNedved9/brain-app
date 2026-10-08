@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="cs">
-hlavni-menu(){}
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,46 +18,76 @@ hlavni-menu(){}
       background: #38bdf8; 
       color: #0f172a; 
       border: none; 
-      padding: 12px 24px; 
+      padding: 16px 24px; 
       font-weight: bold; 
       font-size: 1rem;
       border-radius: 8px; 
       cursor: pointer; 
       transition: background 0.2s;
+      margin: 5px;
     }
     button:hover { background: #7dd3fc; }
-    #status-box {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      background: #1e293b;
-      display: inline-block;
-    }
   </style>
 </head>
 <body>
-  <h1>BrainApp</h1>
-  <p>Vítejte v aplikaci pro trénink logiky a matematiky.</p>
 
 
-  <h2 id="zobraz-otazku">Zatím tu nic není</h2>
-  <button onclick="otevri_matika()">Načíst</button>
+  <div id="hlavni_menu">
+    <h1>BrainApp</h1>
+    <p>Vítejte v aplikaci pro trénink logiky a matematiky.</p>
+    <button onclick="otevri_matika()">📐 Matematika</button>
+  </div>
 
-  <script>
-    async function prejit_na_matika() {
-        const response = await fetch("https://brain-app-nikp.onrender.com/matematika");
-        const data = await response.json();
+
+  <div id="matika" style="display: none;">
+    <h1>Matematika</h1>
+    <p>Vyber si, co chceš procvičovat:</p>
+    <button onclick="nacist_otazky_6()">Matematika 6. Třída</button>
+    <br>
+    <p> 
+      <button onclick="nacist_otazky_7()">Matematika 7. Třída</button>
+    </p>
+    <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
+  </div>
+
+
+  <div id="zobraz_menu_6" style="display: none;">
+    <h1>6.Třída</h1>
+    <p>Čím chceš začít?</p>
+    <p> 
+      <button onclick="nacist_otazky_6_plus_a_minus()">Počítání +,-</button>
+    </p>
+      <button onclick="jdi_zpet_menu_trid()">← Zpět do výběru tříd</button>
+  </div>
+
+  
+  <script> // javascript
+    
+    const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
+    // Až budeš chtít web nahrát živě, přepneš to na:
+    //https://brain-app-nikp.onrender.com
+
+    // Přepínání obrazovek
     function otevri_matika() {
-        document.getElementById("hlavni-menu").style.display = "none";
-        document.getElementById("vyber-operace").style.display = "block";
+      document.getElementById("hlavni_menu").style.display = "none";
+      document.getElementById("matika").style.display = "block";
     }
 
-    function jdiZpet() {
-        document.getElementById("vyber-operace").style.display = "none";
-        document.getElementById("hlavni-menu").style.display = "block";
+    function jdi_zpet_hlavni_menu() {
+      document.getElementById("matika").style.display = "none";
+      document.getElementById("hlavni_menu").style.display = "block";
     }
-      
+    function jdi_zpet_menu_trid(){
+      document.getElementById("hlavni_menu").style.display = "none";
+      document.getElementById("matika").style.display = "block";
+      document.getElementById("zobraz_menu_6").style.display = "none";
+    }
+
+    function nacist_otazky_6() {
+      document.getElementById("matika").style.display = "none";
+      document.getElementById("zobraz_menu_6").style.display = "block";
     }
   </script>
+
 </body>
 </html>
