@@ -41,30 +41,53 @@
 
   <div id="matika" style="display: none;">
     <h1>Matematika</h1>
-    <p>Vyber si, co chceš procvičovat:</p>
-    <button onclick="nacist_otazky_6()">Matematika 6. Třída</button>
-    <br>
-    <p> 
-      <button onclick="nacist_otazky_7()">Matematika 7. Třída</button>
-    </p>
-    <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
-  </div>
-
-
-  <div id="zobraz_menu_6" style="display: none;">
+    <hr>
     <h1>6.Třída</h1>
-    <p>Čím chceš začít?</p>
     <p> 
       <button onclick="nacist_otazky_6_pocty()">Počítání + , - , ˙ , :</button>
       <button onclick="nacist_otazky_6_pocty()">Desetinná čísla</button>
       <button onclick="nacist_otazky_6_pocty()">Dělitelnost přirozených čísel</button>
       <button onclick="nacist_otazky_6_pocty()">Počítání úhlů</button> 
       <button onclick="nacist_otazky_6_pocty()">Převody jednotek</button>
-      <button onclick="nacist_otazky_6_pocty()">Obvod a obsah</button>
-      <button onclick="nacist_otazky_6_pocty()">Povrch a objem</button>
+      <button onclick="nacist_otazky_6_pocty()">Čtverec a obdélník</button>
+      <button onclick="nacist_otazky_6_pocty()">Kvádr a krychle</button>
     </p>
-      <button onclick="jdi_zpet_menu_trid()">← Zpět do výběru tříd</button>
+
+    <h1>7.Třída</h1>
+    <p> 
+      <button onclick="nacist_otazky_6_pocty()">Zlomky</button>
+      <button onclick="nacist_otazky_6_pocty()">Celá čísla</button>
+      <button onclick="nacist_otazky_6_pocty()">Racionální čísla</button>
+      <button onclick="nacist_otazky_6_pocty()">Poměr</button> 
+      <button onclick="nacist_otazky_6_pocty()">Měřítko</button>
+      <button onclick="nacist_otazky_6_pocty()">Trojčlenka</button>
+      <button onclick="nacist_otazky_6_pocty()">Procenta</button>
+      <button onclick="nacist_otazky_6_pocty()">Čtyřúhelníky</button>
+    </p>
+
+    <h1>8.Třída</h1>
+    <p> 
+      <button onclick="nacist_otazky_6_pocty()">Hranoly</button>
+      <button onclick="nacist_otazky_6_pocty()">Mocniny, odmocniny</button>
+      <button onclick="nacist_otazky_6_pocty()">Pythagorova věta</button>
+      <button onclick="nacist_otazky_6_pocty()">Kruh a kružnice</button> 
+      <button onclick="nacist_otazky_6_pocty()">Válec</button>
+      <button onclick="nacist_otazky_6_pocty()">Výrazy</button>
+      <button onclick="nacist_otazky_6_pocty()">Lineární rovnice</button>
+      <button onclick="nacist_otazky_6_pocty()">Statistika</button>
+    </p>
+
+    <h1>9.Třída</h1>
+    <p> 
+      <button onclick="nacist_otazky_6_pocty()">Jehlan, kužel, koule</button>
+      <button onclick="nacist_otazky_6_pocty()">Soustavy lineárních rovnic</button>
+      <button onclick="nacist_otazky_6_pocty()">Rovnice s neznámou ve jmenovateli</button> 
+      <button onclick="nacist_otazky_6_pocty()">Finanční matematika</button>
+      <button onclick="nacist_otazky_6_pocty()">Lomené výrazy</button>
+    </p>
    
+    
+    <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   </div>
 
   
@@ -87,13 +110,8 @@
     function jdi_zpet_menu_trid(){
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("matika").style.display = "block";
-      document.getElementById("zobraz_menu_6").style.display = "none";
     }
 
-    function nacist_otazky_6() {
-      document.getElementById("matika").style.display = "none";
-      document.getElementById("zobraz_menu_6").style.display = "block";
-    }
   </script>
 
 </body>
