@@ -47,6 +47,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     }
     async function odpoved(){
         const odpoved_uzivatele = document.getElementById("odpoved").value;
+        document.getElementById("odpoved").value = ""
 
         const response = await fetch(BACKEND_URL + "/odpoved?typ=" + odpoved_uzivatele)
         const data = await response.json()
@@ -61,5 +62,13 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
             document.getElementById("kontrola").textContent = "Špatně ❌";
             document.getElementById("vysledek").textContent = "Výsledek byl " + data;
         }
-        
     }
+    async function generuj_priklad_slovni(){
+        document.getElementById("obraz_vysledek").style.display = "none";
+        document.getElementById("cviceni").style.display ="none";
+        document.getElementById("generovani").style.display ="block";
+        const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni + "_slovni");
+        const data = await response.json();
+        document.getElementById("priklad").textContent = data
+    }
+    

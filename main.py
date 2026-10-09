@@ -16,30 +16,49 @@ app.add_middleware(
 OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, ":": operator.truediv}
 symbol_list = ["+", "-", "*", ":"]
 
+list_jmen = ["Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan"]
+list_veci_4 = ["jablka", "brambory", "tužky"]
+list_veci_5 = ["jablek", "brambor", "tužek"]
+
 
 @app.get("/priklad")
 def ziskej_priklad(typ: str):
     global vysledek
-    if typ == "pocitani":
-        symbol = random.choices(symbol_list)
-        symbol = symbol[0]
-        if symbol == "+":
-            a = random.randint(10, 100)
-            b = random.randint(10, 100)
-        elif symbol == "-":
-            a = random.randint(10, 100)
-            b = random.randint(5, a - 1)
-        elif symbol == "*":
-            a = random.randint(2, 10)
-            b = random.randint(2, 15)
-        elif symbol == ":":
-            b = random.randint(2, 20)
-            c = random.randint(2, 9)
-            a = c * b
+    symbol = random.choices(symbol_list)
+    symbol = symbol[0]
 
-        vysledek = OPS[symbol](a, b)
+    if symbol == "+":
+        a = random.randint(10, 100)
+        b = random.randint(10, 100)
+    elif symbol == "-":
+        a = random.randint(10, 100)
+        b = random.randint(5, a - 1)
+    elif symbol == "*":
+        a = random.randint(2, 10)
+        b = random.randint(2, 15)
+    elif symbol == ":":
+        b = random.randint(2, 20)
+        c = random.randint(2, 9)
+        a = c * b
+    vysledek = OPS[symbol](a, b)
+    if symbol == ":":
+        vysledek = c
+    if typ == "pocitani":
         priklad = f"{a} {symbol} {b} = ???"
-        return priklad
+
+    elif typ == "pocitani_slovni":
+        jmeno = random.choice(list_jmen)
+        priklad = ""
+        priklad += jmeno + " má "
+        priklad += f"{a} "
+        if a < 5:
+            vec = random.choices(list_veci_4)
+        else:
+            vec = random.choices(list_veci_5)
+        vec = vec[0]
+        priklad += vec
+
+    return priklad
 
 
 @app.get("/odpoved")  # nefunguje pro dělení
