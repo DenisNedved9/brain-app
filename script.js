@@ -12,11 +12,9 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     function jdi_zpet_hlavni_menu() {
       document.getElementById("matika").style.display = "none";
       document.getElementById("hlavni_menu").style.display = "block";
+      document.getElementById("cviceni").style.display = "none";
     }
-    function jdi_zpet_menu_trid(){
-      document.getElementById("hlavni_menu").style.display = "none";
-      document.getElementById("matika").style.display = "block";
-    }
+    
     function vyber_test_cviceni(tlacitko){
         if (tlacitko == "pocitani"){
             document.getElementById("the_title").textContent = "Počítání + , - , ˙ , /";
@@ -45,4 +43,21 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
         const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni);
         const data = await response.json();
         document.getElementById("priklad").textContent = data;
+    }
+    async function opdoved(){
+        const opdoved_uzivatele = document.getElementById("odpoved").value;
+
+        const response = await fetch(BACKEND_URL + "/odpoved?typ=" + opdoved_uzivatele)
+        const data = await response.json()
+        if (data == "spravne"){
+            document.getElementById("obraz_vysledek").style.display = "block"
+            document.getElementById("generovani").style.display ="none";
+            document.getElementById("kontrola").textContent = "Správně 🥳";
+            document.getElementById("vysledek").textContent = "";
+        }
+        else{
+            document.getElementById("kontrola").textContent = "Špatně ❌";
+            document.getElementById("vysledek").textContent = "Výsledek byl " + data;
+        }
+        
     }

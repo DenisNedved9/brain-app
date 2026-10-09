@@ -71,7 +71,16 @@
 
   <div id="cviceni" style="display: none;">
     <h1 id="the_title"></h1>
-    <button onclick="generuj_priklad('druh_cviceni')">Cvičení</button>
+    <hr>
+    <br>
+    <br>
+    <buttonvyber onclick="generuj_priklad()">Cvičení</buttonvyber>
+    <br><br><br><br><br>
+    <buttonvyber onclick="generuj_priklad()">Slovní ůlohy</buttonvyber>
+    <br><br><br><br><br>
+    <buttonvyber onclick="generuj_priklad()">Test!</buttonvyber>
+    <br><br><br><br><br>
+    <buttonvyber onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</buttonvyber>
 
 
   </div>
@@ -80,6 +89,17 @@
     <h2>Vypočítej příklad.</h2>
     <br>
     <h1 id="priklad"></h1>
+    <br>
+    <input type="text" id="odpoved" placeholder="Napiš výsledek...">
+    <buttonodpoved onclick="odpoved()">Odeslat!</buttonodpoved>
+  </div>
+
+  <div id="obraz_vysledek" style="display: none;">
+    <br>
+    <h1 id="kontrola"></h1>
+    <h2 id="vysledek"></h2>
+    <button onclick="generuj_priklad()">Další příklad!</button>
+    <button onclick="generuj_priklad()">Další příklad!</button>
   </div>
 
   

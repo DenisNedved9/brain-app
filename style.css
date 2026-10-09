@@ -21,3 +21,31 @@ button {
     margin: 5px;
 }
 button:hover { background: #7dd3fc; }
+
+buttonvyber { 
+    background: #38bdf8; 
+    color: #0f172a; 
+    border: none; 
+    padding: 22px 34px; 
+    font-weight: bold; 
+    font-size: 1.5rem;
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background 0.2s;
+    margin: 5px;
+}
+buttonvyber:hover { background: #7dd3fc; }
+
+buttonodpoved { 
+    background: #38bdf8; 
+    color: #0f172a; 
+    border: none; 
+    padding: 8px 12px; 
+    font-weight: bold; 
+    font-size: 0.8rem;
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background 0.2s;
+    margin: 5px;
+}
+buttonodpoved:hover { background: #7dd3fc; }
