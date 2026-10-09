@@ -13,6 +13,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
       document.getElementById("matika").style.display = "none";
       document.getElementById("hlavni_menu").style.display = "block";
       document.getElementById("cviceni").style.display = "none";
+      document.getElementById("obraz_vysledek").style.display = "none";
     }
     
     function vyber_test_cviceni(tlacitko){
@@ -37,21 +38,22 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
         document.getElementById("matika").style.display = "none";
     }
     async function generuj_priklad(){
-
+        document.getElementById("obraz_vysledek").style.display = "none";
         document.getElementById("cviceni").style.display ="none";
         document.getElementById("generovani").style.display ="block";
         const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni);
         const data = await response.json();
         document.getElementById("priklad").textContent = data;
     }
-    async function opdoved(){
-        const opdoved_uzivatele = document.getElementById("odpoved").value;
+    async function odpoved(){
+        const odpoved_uzivatele = document.getElementById("odpoved").value;
 
-        const response = await fetch(BACKEND_URL + "/odpoved?typ=" + opdoved_uzivatele)
+        const response = await fetch(BACKEND_URL + "/odpoved?typ=" + odpoved_uzivatele)
         const data = await response.json()
+        document.getElementById("obraz_vysledek").style.display = "block";
+        document.getElementById("generovani").style.display ="none";
         if (data == "spravne"){
-            document.getElementById("obraz_vysledek").style.display = "block"
-            document.getElementById("generovani").style.display ="none";
+            
             document.getElementById("kontrola").textContent = "Správně 🥳";
             document.getElementById("vysledek").textContent = "";
         }
