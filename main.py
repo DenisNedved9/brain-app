@@ -19,6 +19,10 @@ symbol_list = ["+", "-", "*", ":"]
 list_jmen = ["Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan"]
 list_veci_4 = ["jablka", "brambory", "tužky"]
 list_veci_5 = ["jablek", "brambor", "tužek"]
+list_slovesa = ["vzali mu", "přišel o", "ukradli mu"]
+balicky_5 = ["pytlů", "balíků", "skupin"]
+balicky_4 = ["pytle", "balíky", "skupiny"]
+balicky_1 = ["pytli", "balíku", "skupině"]
 
 
 @app.get("/priklad")
@@ -50,13 +54,52 @@ def ziskej_priklad(typ: str):
         jmeno = random.choice(list_jmen)
         priklad = ""
         priklad += jmeno + " má "
-        priklad += f"{a} "
-        if a < 5:
-            vec = random.choices(list_veci_4)
+        if symbol != "*":
+            priklad += f"{a} "
         else:
-            vec = random.choices(list_veci_5)
+            priklad += f"{b} "
+        
+        vec = random.choices(list_veci_5)
+        
+        if a < 5:
+            vec = list_veci_4[list_veci_5.index(vec)]
+        
+            
         vec = vec[0]
-        priklad += vec
+        vec_na_vypis = vec
+        
+        if symbol == "+":
+            priklad += f"{vec} a "
+            priklad += f"dostal dalších {b}"
+        elif symbol == "-":
+
+            priklad += f"{vec}, ale "
+            sloveso = random.choices(list_slovesa)
+            sloveso = sloveso[0]
+            priklad += f"{sloveso} {b}"
+        elif symbol == "*":
+            balicek = random.choices(balicky_5)
+            balicek = balicek[0]
+            if b < 5:
+                balicek = balicky_4[balicky_5.index(balicek)]
+            
+            priklad += f"{balicek} a v každěm je {a} {vec}"
+        else:
+            balicek = random.choices(balicky_5)
+            balicek = balicek[0]
+            balicek_1 = balicky_1[balicky_5.index(balicek)]
+            if b < 5:
+                balicek = balicky_4[balicky_5.index(balicek)]
+            priklad += f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
+            
+            
+
+
+        if symbol != ":":
+            priklad += f", kolik má {vec_na_vypis}?"
+        
+
+        
 
     return priklad
 
