@@ -15,6 +15,12 @@
     <h1>BrainApp</h1>
     <p>Vítejte v aplikaci pro trénink logiky a matematiky.</p>
     <button onclick="otevri_matika()">📐 Matematika</button>
+    <br>
+    <button onclick="otevri_logicka_uloha()">Logické ůlohy</button>
+    <br>
+    <button onclick="otevri_iq_uloha()">Iq ůlohy</button>
+    <br>
+    <button onclick="otevri_programovani()">Programování</button>
   </div>
 
 
@@ -27,46 +33,64 @@
       <button onclick="vyber_test_cviceni('desetina_cisla')">Desetinná čísla</button>
       <button onclick="vyber_test_cviceni('delitelnost')">Dělitelnost přirozených čísel</button>
       <button onclick="vyber_test_cviceni('uhly')">Počítání úhlů</button> 
-      <button onclick="vyber_test_cviceni()">Převody jednotek</button>
-      <button onclick="vyber_test_cviceni()">Čtverec a obdélník</button>
-      <button onclick="vyber_test_cviceni()">Kvádr a krychle</button>
+      <button onclick="vyber_test_cviceni('prevody')">Převody jednotek</button>
+      <button onclick="vyber_test_cviceni('ctverec_obdelnik')">Čtverec a obdélník</button>
+      <button onclick="vyber_test_cviceni('kvadr_krychle')">Kvádr a krychle</button>
     </p>
 
     <h1>7.Třída</h1>
     <p> 
-      <button onclick="vyber_test_cviceni()">Zlomky</button>
-      <button onclick="vyber_test_cviceni()">Celá čísla</button>
-      <button onclick="vyber_test_cviceni()">Racionální čísla</button>
-      <button onclick="vyber_test_cviceni()">Poměr</button> 
-      <button onclick="vyber_test_cviceni()">Měřítko</button>
-      <button onclick="vyber_test_cviceni()">Trojčlenka</button>
-      <button onclick="vyber_test_cviceni()">Procenta</button>
-      <button onclick="vyber_test_cviceni()">Čtyřúhelníky</button>
+      <button onclick="vyber_test_cviceni('zlomky')">Zlomky</button>
+      <button onclick="vyber_test_cviceni('cela_cisla')">Celá čísla</button>
+      <button onclick="vyber_test_cviceni('racionálni cisla')">Racionální čísla</button>
+      <button onclick="vyber_test_cviceni('pomer')">Poměr</button> 
+      <button onclick="vyber_test_cviceni('meritko')">Měřítko</button>
+      <button onclick="vyber_test_cviceni('trojčlenka')">Trojčlenka</button>
+      <button onclick="vyber_test_cviceni('procenta')">Procenta</button>
+      <button onclick="vyber_test_cviceni('ctyruhelniky')">Čtyřúhelníky</button>
     </p>
 
     <h1>8.Třída</h1>
     <p> 
-      <button onclick="vyber_test_cviceni()">Hranoly</button>
-      <button onclick="vyber_test_cviceni()">Mocniny, odmocniny</button>
-      <button onclick="vyber_test_cviceni()">Pythagorova věta</button>
-      <button onclick="vyber_test_cviceni()">Kruh a kružnice</button> 
-      <button onclick="vyber_test_cviceni()">Válec</button>
-      <button onclick="vyber_test_cviceni()">Výrazy</button>
-      <button onclick="vyber_test_cviceni()">Lineární rovnice</button>
-      <button onclick="vyber_test_cviceni()">Statistika</button>
+      <button onclick="vyber_test_cviceni('hranoly')">Hranoly</button>
+      <button onclick="vyber_test_cviceni('mocniny_odmocniny')">Mocniny, odmocniny</button>
+      <button onclick="vyber_test_cviceni('pythagorova_veta')">Pythagorova věta</button>
+      <button onclick="vyber_test_cviceni('kruh_kruznice')">Kruh a kružnice</button> 
+      <button onclick="vyber_test_cviceni('valec')">Válec</button>
+      <button onclick="vyber_test_cviceni('vyrazy')">Výrazy</button>
+      <button onclick="vyber_test_cviceni('linearni_rovnice')">Lineární rovnice</button>
+      <button onclick="vyber_test_cviceni('statistika')">Statistika</button>
     </p>
 
     <h1>9.Třída</h1>
     <p> 
-      <button onclick="vyber_test_cviceni()">Jehlan, kužel, koule</button>
-      <button onclick="vyber_test_cviceni()">Soustavy lineárních rovnic</button>
-      <button onclick="vyber_test_cviceni()">Rovnice s neznámou ve jmenovateli</button> 
-      <button onclick="vyber_test_cviceni()">Finanční matematika</button>
-      <button onclick="vyber_test_cviceni()">Lomené výrazy</button>
+      <button onclick="vyber_test_cviceni('jehlany')">Jehlan, kužel, koule</button>
+      <button onclick="vyber_test_cviceni('soustavy_linearnich_rovnic')">Soustavy lineárních rovnic</button>
+      <button onclick="vyber_test_cviceni('rovnice_s_neznamou_ve_jmenovateli')">Rovnice s neznámou ve jmenovateli</button> 
+      <button onclick="vyber_test_cviceni('financni_matematika')">Finanční matematika</button>
+      <button onclick="vyber_test_cviceni('lomene_vyrazy')">Lomené výrazy</button>
     </p>
    
     
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
+  </div>
+
+  <div id="programovani" style="display: none;">
+    <h1>Programování</h1>
+    <hr>
+    <p> 
+      <button onclick="python_1()">Python - základní funkce a datové typy</button>
+    </p>
+    <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
+  </div>
+  <div id="python_1" style="display: none;">
+    <h1>Python - základní funkce a datové typy</h1>
+    <hr>
+    <p> 
+      <button onclick="python_1_print()">Print/Output</button>
+      <button onclick="python_1_typy()">Datové typy</button>
+    </p>
+    <button onclick="jdi_zpet_programovani()">← Zpět do programování</button>
   </div>
 
   <div id="cviceni" style="display: none;">
@@ -76,7 +100,7 @@
     <br>
     <buttonvyber onclick="generuj_priklad()">Cvičení</buttonvyber>
     <br><br><br><br><br>
-    <buttonvyber onclick="generuj_priklad_slovni()">Slovní ůlohy</buttonvyber>
+    <buttonvyber onclick="generuj_priklad_slovni()">Slovní úlohy</buttonvyber>
     <br><br><br><br><br>
     <buttonvyber onclick="generuj_priklad()">Test!</buttonvyber>
     <br><br><br><br><br>

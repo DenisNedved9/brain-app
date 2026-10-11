@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import random
 import operator
 
+
+
+
 app = FastAPI()  # py -m uvicorn main:app --reload
 
 # Enable CORS so GitHub Pages front-end can talk to Render back-end
@@ -15,6 +18,7 @@ app.add_middleware(
 )
 OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, ":": operator.truediv}
 symbol_list = ["+", "-", "*", ":"]
+symbol = random.choice(symbol_list)
 
 list_jmen = ["Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan"]
 list_veci_4 = ["jablka", "brambory", "tužky"]
@@ -25,11 +29,12 @@ balicky_4 = ["pytle", "balíky", "skupiny"]
 balicky_1 = ["pytli", "balíku", "skupině"]
 
 
+
+
 @app.get("/priklad")
 def ziskej_priklad(typ: str):
-    global vysledek
-    symbol = random.choices(symbol_list)
-    symbol = symbol[0]
+    
+    
 
     if symbol == "+":
         a = random.randint(10, 100)
@@ -51,62 +56,57 @@ def ziskej_priklad(typ: str):
         priklad = f"{a} {symbol} {b} = ???"
 
     elif typ == "pocitani_slovni":
-        jmeno = random.choice(list_jmen)
-        priklad = ""
-        priklad += jmeno + " má "
-        if symbol != "*":
-            priklad += f"{a} "
+        priklad = generuj_slovni(a, b)
+             
+    elif typ == "pocitani_test":
+        druh = random.randint(1, 4)
+        if druh == 1:
+            priklad = generuj_slovni(a, b)
         else:
-            priklad += f"{b} "
+            priklad = f"{a} {symbol} {b} = ???"
+    return {"priklad": priklad, "vysledek": vysledek}
+
+def generuj_slovni(a, b):
+    jmeno = random.choice(list_jmen)
+    priklad = ""
+    priklad += jmeno + " má "
+    if symbol != "*":
+        priklad += f"{a} "
+    else:
+        priklad += f"{b} "
+    vec = random.choice(list_veci_5)
         
-        vec = random.choices(list_veci_5)
-        
-        if a < 5:
-            vec = list_veci_4[list_veci_5.index(vec)]
+    if a < 5:
+        vec = list_veci_4[list_veci_5.index(vec)]
         
             
-        vec = vec[0]
-        vec_na_vypis = vec
+    vec_na_vypis = vec
         
-        if symbol == "+":
-            priklad += f"{vec} a "
-            priklad += f"dostal dalších {b}"
-        elif symbol == "-":
+    if symbol == "+":
+        priklad += f"{vec} a "
+        priklad += f"dostal dalších {b}"
+    elif symbol == "-":
 
-            priklad += f"{vec}, ale "
-            sloveso = random.choices(list_slovesa)
-            sloveso = sloveso[0]
-            priklad += f"{sloveso} {b}"
-        elif symbol == "*":
-            balicek = random.choices(balicky_5)
-            balicek = balicek[0]
-            if b < 5:
-                balicek = balicky_4[balicky_5.index(balicek)]
+        priklad += f"{vec}, ale "
+        sloveso = random.choices(list_slovesa)
+        sloveso = sloveso[0]
+        priklad += f"{sloveso} {b}"
+    elif symbol == "*":
+        balicek = random.choices(balicky_5)
+        balicek = balicek[0]
+        if b < 5:
+            balicek = balicky_4[balicky_5.index(balicek)]
             
-            priklad += f"{balicek} a v každěm je {a} {vec}"
-        else:
-            balicek = random.choices(balicky_5)
-            balicek = balicek[0]
-            balicek_1 = balicky_1[balicky_5.index(balicek)]
-            if b < 5:
-                balicek = balicky_4[balicky_5.index(balicek)]
-            priklad += f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
-            
-            
-
-
-        if symbol != ":":
-            priklad += f", kolik má {vec_na_vypis}?"
-        
-
-        
+        priklad += f"{balicek} a v každěm je {a} {vec}"
+    else:
+        balicek = random.choices(balicky_5)
+        balicek = balicek[0]
+        balicek_1 = balicky_1[balicky_5.index(balicek)]
+        if b < 5:
+            balicek = balicky_4[balicky_5.index(balicek)]
+        priklad += f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
+    if symbol != ":":
+        priklad += f", kolik má {vec_na_vypis}?"
 
     return priklad
 
-
-@app.get("/odpoved")  # nefunguje pro dělení
-def ziskej_odpoved(typ: str):
-    if str(vysledek).strip() == typ:
-        return "spravne"
-    else:
-        return vysledek
