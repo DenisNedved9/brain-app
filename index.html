@@ -79,30 +79,279 @@
     <h1>Programování</h1>
     <hr>
     <p> 
-      <button onclick="python_1()">Python - základní funkce a datové typy</button>
+      <button onclick="python_1()">Python - základní funkce</button>
     </p>
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   </div>
   <div id="python_1" style="display: none;">
-    <h1>Python - základní funkce a datové typy</h1>
+    <h1>Python - základní funkce</h1>
     <hr>
     <p> 
-      <button onclick="python_1_print()">Print/Output</button>
-      <button onclick="python_1_typy()">Datové typy</button>
+      <button onclick="python_1_print()">Print</button>
+      <button onclick="python_1_typy()">Datové typy a Input</button>
+      <button onclick="python_1_operace()">Základní operace</button>
+      <button onclick="python_1_podminky()">Podmínky If</button>
     </p>
     <button onclick="jdi_zpet_programovani()">← Zpět do programování</button>
   </div>
+
+  <div id="python_1_print" style="display: none;">
+    <h1>Print</h1>
+    <hr>
+    
+
+      <h2>🚀 Jak přimět Python mluvit?</h2>
+      <p class="p2">
+        Chceš, aby ti program něco napsal na obrazovku? Použij příkaz <code>print()</code>.<br>
+        💡 <strong>Pravidlo:</strong> Všechno, co má Python vytisknout jako text, musí být v <strong>závorkách a uvozovkách</strong>.
+      </p>
+      <textarea class="console-output" rows="1" cols="30" readonly>print("Hello, World!")</textarea>
+      <p class="p2">Tento příkaz vytiskne na obrazovku:</p>
+      <textarea class="console-output" rows="1" cols="20" readonly>Hello, World!</textarea>
+      
+      <p class="p2"><em>Všimni si, že uvozovky ani závorky v konzoli neuvidíš – ty slouží jen jako instrukce pro Python.</em></p>
+
+
+    <br><hr><br>
+
+
+      <h2>📜 Více příkazů = více řádků</h2>
+      <p class="p2">Když napíšeš více příkazů pod sebe:</p>
+      
+      <textarea class="code-box" rows="2" cols="35" readonly>print("Ahoj")
+print("Jak se máš?")</textarea>
+      
+      <p class="p2">Každý <code>print()</code> vytiskne svůj text automaticky <strong>na nový řádek</strong>:</p>
+      <textarea class="console-output" rows="2" cols="20" readonly>Ahoj
+Jak se máš?</textarea>
+
+
+    <br><hr><br>
+
+
+      <h2>⚡ Triky s <code>print()</code> a tajné poznámky</h2>
+      <p class="p2">Chceš dostat více textů na <strong>jeden řádek</strong>? Máš dvě možnosti:</p>
+
+      <textarea class="code-box" rows="3" cols="55" readonly>print("Ahoj", "Jak se máš?") # 1. možnost (s čárkou)
+print("Ahoj jak se máš?")    # 2. možnost (jeden text)</textarea>
+
+      <p class="p2">Oba způsoby vypíší na obrazovku to samé:</p>
+      <textarea class="console-output" rows="1" cols="25" readonly>Ahoj Jak se máš?</textarea><br>
+
+
+      <strong>1. možnost (čárka):</strong> Spojí dva různé texty a automaticky mezi ně vloží mezeru. Super, až budeme pracovat s proměnnými v další lekci!</li>
+      <br><strong>2. možnost:</strong> Vypíše vše rovnou jako jeden souvislý text.<br>
+
+      <p class="p2">
+        💬 <strong>Co znamená ten symbol <code>#</code>?</strong><br>
+        To je <strong>komentář</strong>. Všechno za tímto symbolem Python úplně ignoruje. Slouží to jako tvé vlastní poznámky v kódu, abys ty i ostatní věděli, co kód dělá.
+      </p>
+      <hr>
+      <h1>📝 Test</h1>
+      <p class="p2">Co vytiskne tento kód?</p>
+      <textarea class="code-box" rows="1" cols="30" readonly>print("Ahoj", "toto je test")</textarea>
+      <p class="p2">Napiš odpověď do políčka níže a klikni na <strong>Odeslat!</strong></p>
+      <input type="text" id="odpoved_print" placeholder="Napiš odpověď...">
+      <buttonodpoved onclick="kontrola_odpovedi_print(document.getElementById('odpoved_print').value)">Odeslat!</buttonodpoved>
+      <h2 id="kontrola_print"></h2>
+      
+      <br><hr><br><br>
+      <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
+      <br><br>
+      <button onclick="python_1_typy()">Další lekce</button>
+
+  </div>
+
+  <div id="python_1_typy" style="display: none;">
+    <h1>📦 Datové typy a Input</h1>
+    <hr>
+    <p class="p2">
+        V Pythonu se setkáš s různými typy dat. Mezi ty nejběžnější patří:
+    </p>
+    <ul class="p2">
+        <<strong>int</strong> – celá čísla (např. 1, 42, -7)<br>
+        <strong>float</strong> – desetinná čísla (např. 3.14, -0.001)<br>
+        <strong>str</strong> – textové řetězce (např. "Ahoj", "Python")<br>
+        <strong>bool</strong> – logické hodnoty (True nebo False)
+    </ul>
+
+    <hr>
+
+    <p class="p2">
+        🤖 Chceš-li od uživatele získat vstup, použij příkaz <code>input()</code>. Například:
+    </p>
+    
+    <textarea class="code-box" rows="2" cols="35" readonly>jmeno = input("Jak se jmenuješ? ")</textarea>
+    
+    <p class="p2">
+        Tento kód vypíše <strong>Jak se jmenuješ?</strong> a následně čeká na uživatelský vstup – takže stačí něco napsat.<br>
+        V tomto kódu vidíme i první proměnnou, a to <strong>jmeno</strong>. Toto je proměnná typu <strong>str</strong> 
+        neboli string.<br> Když nám uživatel zadá například <strong>Pepa</strong>, naše proměnná <strong>jmeno</strong>
+         bude obsahovat hodnotu <strong>Pepa</strong>, takže můžeme udělat:
+    </p>
+    
+    <textarea class="code-box" rows="3" cols="35" readonly>jmeno = input("Jak se jmenuješ? ")
+print(jmeno)</textarea>
+    
+    <p class="p2">
+        Tento program nám po zadání jména <strong>Pepa</strong> vypíše: 
+    </p>
+    
+    <textarea class="code-box" rows="1" cols="8" readonly>Pepa</textarea>
+
+    <hr>
+
+    <p class="p2">
+        ✨ K proměnné můžeme také cokoliv přidat, například:
+    </p>
+    
+    <textarea class="code-box" rows="3" cols="38" readonly>jmeno = input("Jak se jmenuješ? ")
+print("Moje jméno je " + jmeno)</textarea>
+    
+    <p class="p2">
+        Jak můžeme vidět, texty a proměnné spojujeme pomocí znaménka <code>+</code>.<br>
+        Tento kód by nám po zadání jména Pepa vypsal:
+    </p>
+    
+    <textarea class="code-box" rows="1" cols="22" readonly>Moje jméno je Pepa</textarea>
+
+    <hr>
+    <h1>📝 Test</h1>
+      <p class="p2">Co musím napsat aby tento kód vytiskl "Ahoj toto je test"?</p>
+      <textarea class="code-box" rows="3" cols="42" readonly>promena = input("Co chceš napsat? ")
+print("Ahoj" + promena)
+      </textarea>
+      <p class="p2">Napiš odpověď do políčka níže a klikni na <strong>Odeslat!</strong></p>
+      <input type="text" id="odpoved_typy" placeholder="Napiš odpověď...">
+      <buttonodpoved onclick="kontrola_odpovedi_typy(document.getElementById('odpoved_typy').value)">Odeslat!</buttonodpoved>
+      <h2 id="kontrola_typy"></h2>
+    
+    <br><hr><br><br>
+    <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
+    <br><br>
+    <button onclick="python_1_operace()">Další lekce</button>
+</div>
+
+  <div id="python_1_operace" style="display: none;">
+    <h1>🧮 Základní operace</h1>
+    <hr>
+    <p class="p2">
+      V Pythonu můžeme provádět základní matematické operace. Zde jsou některé z nich:
+    </p>
+    <ul class="p2">
+        <strong>+</strong> – sčítání (např. 3 + 2 = 5)<br>
+        <strong>-</strong> – odčítání (např. 5 - 2 = 3)<br>
+        <strong>*</strong> – násobení (např. 4 * 2 = 8)<br>
+        <strong>/</strong> – dělení (např. 8 / 2 = 4.0)<br>
+        <strong>//</strong> – celočíselné dělení (např. 7 // 2 = 3)<br>
+        <strong>%</strong> – zbytek po dělení (např. 7 % 2 = 1)<br>
+        <strong>**</strong> – umocňování (např. 2 ** 3 = 8)
+    </ul>
+
+    <hr>
+
+    <h2>
+      🚀 Můžeme také kombinovat proměnné a operace:
+    </h2>
+
+    <textarea class="code-box" rows="3" cols="35" readonly>a = 5
+b = 4
+print(a + b)</textarea>
+    
+    <p class="p2">
+      ⚡Tento kód nám vypíše <strong>9</strong>, protože jsme proměnné <strong>a</strong> přiřadili hodnotu 5 <br>
+      a proměnné <strong>b</strong> přiřadili hodnotu 4 a pak jsme je sečetli.
+    </p>
+    <textarea class="code-box" rows="4" cols="75" readonly>a = 5
+b = 4
+print(a - b\n a + b) # \n začne psát na další linii</textarea>
+    <p class="p2">
+      Tento kód nám vypíše:
+    </p>
+    <textarea class="console-output" rows="2" cols="20" readonly>1
+9</textarea>
+    <hr>
+<h2>Operace <strong>\n</strong></h2>
+<p class="p2">
+  Tato operace se používá převážně abychom nemuseli psát několik print() funkcí
+  například místo:
+</p>
+  <textarea class="console-output" rows="5" cols="14" readonly>print(1)
+print(2)
+print(3)
+print(4)
+</textarea>
+<p>Output:</p>
+
+<textarea class="console-output" rows="5" cols="6" readonly>1
+2
+3
+4
+</textarea>
+<p class="p2">Můžeme napsat:</p>
+<textarea class="console-output" rows="2" cols="20" readonly>print("1\n2\n3\n4")
+</textarea>
+<p class="p2">Output:</p>
+<textarea class="console-output" rows="5" cols="6" readonly>1
+2
+3
+4
+</textarea>
+
+
+<hr>
+<h2>Závorky</h2>
+  <p class="p2">Operace mohou být i závorky například:</p>
+
+  <textarea class="code-box" rows="6" cols="90" readonly>a = 5
+b = 2
+c = a - b  # takže c je 3, použili jsme proměnné na další proměnnou
+print((a + b) * c)   # zde používáme závorky které fungují stejně jako v normální matice</textarea>
+<p>Output:</p>
+<textarea class="code-box" rows="1" cols="7" readonly>21</textarea>
+
+
+<hr>
+
+    <h1>📝 Test</h1>
+      <p class="p2">Co vypíše tento kód</p>
+      <textarea class="code-box" rows="3" cols="42" readonly>a = 7
+b = 4
+print((a + b) * 2)
+      </textarea>
+      <p class="p2">Napiš odpověď do políčka níže a klikni na <strong>Odeslat!</strong></p>
+      <input type="text" id="odpoved_operace" placeholder="Napiš odpověď...">
+      <buttonodpoved onclick="kontrola_odpovedi_operace(document.getElementById('odpoved_operace').value)">Odeslat!</buttonodpoved>
+      <h2 id="kontrola_operace"></h2>
+    
+    <br><hr><br><br>
+    <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
+    <br><br>
+    <button onclick="python_1_operace()">Další lekce</button>
+</div>
+
+
+  <div id="python_1_podminky" style="display: none;">
+    <h1>Podmínky</h1>
+    <hr>
+    <p class="p2">
+      V Pythonu můžeme používat podmínky, které nám umožňují rozhodovat, co se má stát v závislosti na určitém stavu.
+    </p>
+    
+
+  </div>
+
 
   <div id="cviceni" style="display: none;">
     <h1 id="the_title"></h1>
     <hr>
     <br>
     <br>
-    <buttonvyber onclick="generuj_priklad()">Cvičení</buttonvyber>
+    <buttonvyber onclick="generuj_priklad('normal')">Cvičení</buttonvyber>
     <br><br><br><br><br>
-    <buttonvyber onclick="generuj_priklad_slovni()">Slovní úlohy</buttonvyber>
+    <buttonvyber onclick="generuj_priklad('slovni')">Slovní úlohy</buttonvyber>
     <br><br><br><br><br>
-    <buttonvyber onclick="generuj_priklad()">Test!</buttonvyber>
+    <buttonvyber onclick="generuj_priklad('test')">Test!</buttonvyber>
     <br><br><br><br><br>
     <buttonvyber onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</buttonvyber>
 
@@ -110,7 +359,7 @@
   </div>
 
   <div id="generovani" style="display: none;">
-    <h2>Vypočítej příklad.</h2>
+    <h2>Vypočítej příklad.</h2><h3 id="pocet"></h3>
     <br>
     <h1 id="priklad"></h1>
     <br>
@@ -122,10 +371,14 @@
     <br>
     <h1 id="kontrola"></h1>
     <h2 id="vysledek"></h2>
-    <button onclick="generuj_priklad()">Další příklad!</button>
+    <button onclick="generuj_priklad(null)">Další příklad!</button>
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   </div>
-
+  <div id="konec_testu" style="display: none;">
+    <br>
+    <h1 id="konec_testu">Konec testu!</h1>
+    <h2 id="vysledek_testu"></h2>
+    <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   
  
   <script src="script.js"></script> <!-- javascript -->

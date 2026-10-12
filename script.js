@@ -4,35 +4,102 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
 
     let vybrane_cviceni = ""
     let vysledek = 0
+    let pocet_prikladu = 0
+    let pocet_potreba = 10
+    let druh = "null"
+    let pocet_dobre = 0
     // Přepínání obrazovek
     function otevri_matika() {
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("matika").style.display = "block";
+      window.scrollTo(0, 0);
     }
 
     function otevri_programovani() {
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("programovani").style.display = "block";
+      window.scrollTo(0, 0);
     }
 
     function otevri_logicka_uloha() {
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("logicka_uloha").style.display = "block";
+      window.scrollTo(0, 0);
     }
 
     function otevri_iq_uloha() {
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("iq_uloha").style.display = "block";
+      window.scrollTo(0, 0);
+    }
+
+    function kontrola_odpovedi_print(odpoved) {
+      const vysledek = document.getElementById("kontrola_print");
+      if (odpoved === "Ahoj toto je test") {
+        vysledek.textContent = "Správně!";
+      } else {
+        vysledek.textContent = "Nesprávně!";
+      }
+    }
+    function kontrola_odpovedi_typy(odpoved) {
+      const vysledek = document.getElementById("kontrola_typy");
+      if (odpoved === "toto je test") {
+        vysledek.textContent = "Správně!";
+      } else {
+        vysledek.textContent = "Nesprávně!";
+      }
+    }
+    function kontrola_odpovedi_operace(odpoved) {
+      const vysledek = document.getElementById("kontrola_operace");
+      if (odpoved === "22") {
+        vysledek.textContent = "Správně!";
+      } else {
+        vysledek.textContent = "Nesprávně!";
+      }
     }
 
     function python_1() {
       document.getElementById("programovani").style.display = "none";
       document.getElementById("python_1").style.display = "block";
+      window.scrollTo(0, 0);
+    }
+    function python_1_print() {
+      document.getElementById("python_1_print").style.display = "block";
+      document.getElementById("python_1").style.display = "none";
+      window.scrollTo(0, 0);
+    }
+    function python_1_typy() {
+      document.getElementById("python_1_typy").style.display = "block";
+      document.getElementById("python_1").style.display = "none";
+      document.getElementById("python_1_print").style.display = "none";
+      window.scrollTo(0, 0);
+    }
+    function python_1_operace() {
+      document.getElementById("python_1_operace").style.display = "block";
+      document.getElementById("python_1").style.display = "none";
+      document.getElementById("python_1_typy").style.display = "none";
+      window.scrollTo(0, 0);
+    }
+    function python_1_podminky() {
+      document.getElementById("python_1_podminky").style.display = "block";
+      document.getElementById("python_1").style.display = "none";
+      document.getElementById("python_1_operace").style.display = "none";
+      window.scrollTo(0, 0);
     }
 
     function jdi_zpet_programovani() {
       document.getElementById("programovani").style.display = "block";
       document.getElementById("python_1").style.display = "none";
+      document.getElementById("python_1_print").style.display = "none";
+      document.getElementById("python_1_typy").style.display = "none";
+      document.getElementById("python_1_operace").style.display = "none";
+    }
+
+    function jdi_zpet_programovani_zaklad() {
+      document.getElementById("python_1").style.display = "block";
+      document.getElementById("python_1_print").style.display = "none";
+      document.getElementById("python_1_typy").style.display = "none";
+      document.getElementById("python_1_operace").style.display = "none";
     }
 
     function jdi_zpet_hlavni_menu() {
@@ -42,6 +109,9 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
       document.getElementById("obraz_vysledek").style.display = "none";
       document.getElementById("programovani").style.display = "none";
       document.getElementById("python_1").style.display = "none";
+      document.getElementById("logicka_uloha").style.display = "none";
+      document.getElementById("iq_uloha").style.display = "none";
+      document.getElementById("konec_testu").style.display = "none";
     }
 
     
@@ -167,15 +237,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
 
         
     }
-    async function generuj_priklad(){
-        document.getElementById("obraz_vysledek").style.display = "none";
-        document.getElementById("cviceni").style.display ="none";
-        document.getElementById("generovani").style.display ="block";
-        const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni);
-        const data = await response.json();
-        document.getElementById("priklad").textContent = data.priklad;
-        vysledek = data.vysledek
-    }
+    
     async function odpoved(){
         const odpoved_uzivatele = document.getElementById("odpoved").value.trim();
         document.getElementById("odpoved").value = ""
@@ -186,28 +248,62 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
             
             document.getElementById("kontrola").textContent = "Správně 🥳";
             document.getElementById("vysledek").textContent = "";
+            if (druh == "test"){
+                pocet_dobre++;
+            }
         }
         else{
             document.getElementById("kontrola").textContent = "Špatně ❌";
             document.getElementById("vysledek").textContent = "Výsledek byl " + vysledek;
         }
     }
-    async function generuj_priklad_slovni(){
-        document.getElementById("obraz_vysledek").style.display = "none";
-        document.getElementById("cviceni").style.display ="none";
-        document.getElementById("generovani").style.display ="block";
-        const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni + "_slovni");
-        const data = await response.json();
-        document.getElementById("priklad").textContent = data.priklad;
-        vysledek = data.vysledek;
-    }
-    async function generuj_priklad_test(){
-        document.getElementById("obraz_vysledek").style.display = "none";
-        document.getElementById("cviceni").style.display ="none";
-        document.getElementById("generovani").style.display ="block";
-        const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni + "_test");
-        const data = await response.json();
-        document.getElementById("priklad").textContent = data.priklad;
-        vysledek = data.vysledek;
+    async function generuj_priklad(argument){
+        if (argument == null){
+            argument = druh
+        }
+        if (argument == "normal"){
+            druh = "normal"
+            document.getElementById("obraz_vysledek").style.display = "none";
+            document.getElementById("cviceni").style.display ="none";
+            document.getElementById("generovani").style.display ="block";
+            const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni);
+            const data = await response.json();
+            document.getElementById("priklad").textContent = data.priklad;
+            vysledek = data.vysledek
+        }
+        
+        else if (argument == "slovni"){
+            druh = "slovni"
+            document.getElementById("obraz_vysledek").style.display = "none";
+            document.getElementById("cviceni").style.display ="none";
+            document.getElementById("generovani").style.display ="block";
+            const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni + "_slovni");
+            const data = await response.json();
+            document.getElementById("priklad").textContent = data.priklad;
+            vysledek = data.vysledek;
+        }
+        else if (argument == "test"){
+            druh = "test" 
+            pocet_prikladu++;
+            if (pocet_prikladu < pocet_potreba + 1){
+                document.getElementById("obraz_vysledek").style.display = "none";
+                document.getElementById("cviceni").style.display ="none";
+                document.getElementById("generovani").style.display ="block";
+                const response = await fetch(BACKEND_URL + "/priklad?typ=" + vybrane_cviceni + "_test");
+                const data = await response.json();
+                document.getElementById("priklad").textContent = data.priklad;
+                vysledek = data.vysledek;
+            }
+            else{
+                document.getElementById("obraz_vysledek").style.display = "none";
+                document.getElementById("cviceni").style.display ="none";
+                document.getElementById("konec_testu").style.display ="block";
+                document.getElementById("vysledek_testu").textContent = "Správně: " + pocet_dobre + "/" + pocet_potreba;
+                pocet_prikladu = 0;
+                pocet_dobre = 0;
+            }
+           
+            document.getElementById("pocet").textContent = pocet_prikladu + "/" + pocet_potreba;
+        }
     }
     

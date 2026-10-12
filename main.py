@@ -3,9 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import random
 import operator
 
-
-
-
 app = FastAPI()  # py -m uvicorn main:app --reload
 
 # Enable CORS so GitHub Pages front-end can talk to Render back-end
@@ -16,9 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, ":": operator.truediv}
-symbol_list = ["+", "-", "*", ":"]
-symbol = random.choice(symbol_list)
+OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
+symbol_list = ["+", "-", "*", "/"]
 
 list_jmen = ["Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan"]
 list_veci_4 = ["jablka", "brambory", "tužky"]
@@ -29,13 +25,12 @@ balicky_4 = ["pytle", "balíky", "skupiny"]
 balicky_1 = ["pytli", "balíku", "skupině"]
 
 
-
-
-@app.get("/priklad")
-def ziskej_priklad(typ: str):
-    
-    
-
+def generuj_cisla():
+    c = 0
+    d = None
+    second_symbol = None
+    symbol = random.choice(symbol_list)
+    mnozstvi = random.randint(1, 3)
     if symbol == "+":
         a = random.randint(10, 100)
         b = random.randint(10, 100)
@@ -45,28 +40,95 @@ def ziskej_priklad(typ: str):
     elif symbol == "*":
         a = random.randint(2, 10)
         b = random.randint(2, 15)
-    elif symbol == ":":
+    elif symbol == "/":
         b = random.randint(2, 20)
         c = random.randint(2, 9)
         a = c * b
-    vysledek = OPS[symbol](a, b)
-    if symbol == ":":
-        vysledek = c
-    if typ == "pocitani":
-        priklad = f"{a} {symbol} {b} = ???"
+    if mnozstvi == 1:
+        second_symbol = random.choice(symbol_list)
+        if second_symbol == "+" or second_symbol == "-":
+            d = random.randint(10, 100)
+        else:
+            d = random.randint(3, 7)
 
+    return a, b, c, d, symbol, second_symbol
+
+
+@app.get("/priklad")
+def ziskej_priklad(typ: str):
+
+    a, b, c, d, symbol, second_symbol = generuj_cisla()
+
+    if typ == "pocitani":
+        priklad = (
+            (f"{a} {symbol} {b} = ???")
+            if not second_symbol
+            else (f"{a} {symbol} {b} {second_symbol} {d} = ???")
+        )
     elif typ == "pocitani_slovni":
-        priklad = generuj_slovni(a, b)
-             
+        priklad, vysledek = generuj_slovni(a, b, symbol)
     elif typ == "pocitani_test":
         druh = random.randint(1, 4)
         if druh == 1:
-            priklad = generuj_slovni(a, b)
+            priklad, vysledek = generuj_slovni(a, b, symbol)
         else:
-            priklad = f"{a} {symbol} {b} = ???"
+            priklad = (
+                f"{a} {symbol} {b} = ???"
+                if not second_symbol
+                else f"{a} {symbol} {b} {second_symbol} {d} = ???"
+            )
+    elif typ == "desetina_cisla":
+        a, b, c, d = (
+            (a / 10, b / 10, c / 10, d / 10)
+            if second_symbol
+            else (a / 10, b / 10, c / 10, None)
+        )
+        priklad = (
+            f"{a} {symbol} {b} = ???"
+            if not second_symbol
+            else f"{a} {symbol} {b} {second_symbol} {d} = ???"
+        )
+    elif typ == "desetina_cisla_slovni":
+        a, b, c, d = (
+            (a / 10, b / 10, c / 10, d / 10)
+            if second_symbol
+            else (a / 10, b / 10, c / 10, None)
+        )
+        priklad, vysledek = generuj_slovni(a, b, symbol)
+    elif typ == "desetina_cisla_test":
+        druh = random.randint(1, 4)
+        a, b, c, d = (
+            (a / 10, b / 10, c / 10, d / 10)
+            if second_symbol
+            else (a / 10, b / 10, c / 10, None)
+        )
+        if druh == 1:
+            priklad, vysledek = generuj_slovni(a, b, symbol)
+        else:
+            priklad = (
+                f"{a} {symbol} {b} = ???"
+                if not second_symbol
+                else f"{a} {symbol} {b} {second_symbol} {d} = ???"
+            )
+
+    # Bezpečný výpočet výsledku pro normální příklady a testy (pokud to nebyla slovní úloha)
+    if typ != "pocitani_slovni" and not (typ in ["pocitani_test", "desetina_cisla_test"] and druh == 1):
+        if symbol == "/":
+            vysledek = c if "desetina" not in typ else round(c / 10, 2)
+        else:
+            vysledek = round(OPS[symbol](a, b), 2)
+
+        if second_symbol:
+            if second_symbol == "+": vysledek += d
+            elif second_symbol == "-": vysledek -= d
+            elif second_symbol == "*": vysledek *= d
+            elif second_symbol == "/": vysledek /= d
+            vysledek = round(vysledek, 2)
+
     return {"priklad": priklad, "vysledek": vysledek}
 
-def generuj_slovni(a, b):
+
+def generuj_slovni(a, b, symbol):
     jmeno = random.choice(list_jmen)
     priklad = ""
     priklad += jmeno + " má "
@@ -75,38 +137,36 @@ def generuj_slovni(a, b):
     else:
         priklad += f"{b} "
     vec = random.choice(list_veci_5)
-        
+
     if a < 5:
         vec = list_veci_4[list_veci_5.index(vec)]
-        
-            
+
     vec_na_vypis = vec
-        
+
     if symbol == "+":
         priklad += f"{vec} a "
         priklad += f"dostal dalších {b}"
     elif symbol == "-":
-
         priklad += f"{vec}, ale "
-        sloveso = random.choices(list_slovesa)
-        sloveso = sloveso[0]
+        sloveso = random.choice(list_slovesa)
         priklad += f"{sloveso} {b}"
     elif symbol == "*":
-        balicek = random.choices(balicky_5)
-        balicek = balicek[0]
+        balicek = random.choice(balicky_5)
         if b < 5:
             balicek = balicky_4[balicky_5.index(balicek)]
-            
-        priklad += f"{balicek} a v každěm je {a} {vec}"
+            priklad += f"{balicek} a v každém jsou {a} {vec}"
+        else:
+            priklad += f"{balicek} a v každém je {a} {vec}"
     else:
-        balicek = random.choices(balicky_5)
-        balicek = balicek[0]
+        balicek = random.choice(balicky_5)
         balicek_1 = balicky_1[balicky_5.index(balicek)]
         if b < 5:
             balicek = balicky_4[balicky_5.index(balicek)]
-        priklad += f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
-    if symbol != ":":
+        priklad += (
+            f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
+        )
+    if symbol != "/":
         priklad += f", kolik má {vec_na_vypis}?"
-
-    return priklad
-
+        
+    vysledek = round(OPS[symbol](a, b), 2) if symbol != "/" else a / b
+    return priklad, vysledek
