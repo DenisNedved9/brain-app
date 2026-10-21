@@ -1,1 +1,1 @@
-Matematická a Programátorská webová stránka základní školu
+Matematická a Programátorská webová stránka dělaná převážně na míru pro základní školu.

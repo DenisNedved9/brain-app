@@ -28,10 +28,13 @@ def test_kodu(event):
     elif typ == "print2":
         potrebny_vystup = "Python je skvělý"
     elif typ == "print3":
-        if len(vystup) == 2 and vystup[0].strip() == "Ahoj" and vystup[1].strip() == "Mám se dobře":
-            correct = True
-            document.getElementById("test_program_text").textContent = "Správně"
-    if vystup == potrebny_vystup or correct:
+        potrebny_vystup = "Ahoj\nMám se dobře"
+    elif typ == "print4":
+        potrebny_vystup = "Nejsem\nRobot"
+    elif typ == "print5":
+        potrebny_vystup = "Python\nJe programovací jazyk"
+
+    if vystup == potrebny_vystup:
         document.getElementById("test_program_text").textContent = "Správně"
     else:
         document.getElementById("test_program_text").textContent = "Špatně"

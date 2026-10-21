@@ -98,7 +98,8 @@ def ziskej_priklad(typ: str):
             else (a / 10, b / 10, c / 10, None)
         )
         priklad, vysledek = generuj_slovni_desetinne(a, b, symbol)
-        return {"priklad": priklad, "vysledek": vysledek}
+        zobrazeny_priklad = priklad.replace(".", ",")
+        return {"priklad": zobrazeny_priklad, "vysledek": vysledek}
     elif typ == "desetina_cisla_test":
         druh = random.randint(1, 4)
         a, b, c, d = (
@@ -108,7 +109,8 @@ def ziskej_priklad(typ: str):
         )
         if druh == 1:
             priklad, vysledek = generuj_slovni_desetinne(a, b, symbol)
-            return {"priklad": priklad, "vysledek": vysledek}
+            zobrazeny_priklad = priklad.replace(".", ",")
+            return {"priklad": zobrazeny_priklad, "vysledek": vysledek}
         else:
             priklad = (
                 f"{a} {symbol} {b} = ???"
@@ -116,30 +118,16 @@ def ziskej_priklad(typ: str):
                 else f"{a} {symbol} {b} {second_symbol} {d} = ???"
             )
 
-        
-
-
-
-    if typ != "pocitani_slovni" and not (
-        typ in ["pocitani_test", "desetina_cisla_test"] and druh == 1
-    ):
+    if second_symbol:
+        vyraz_pro_vypocty = f"{a} {symbol} {b} {second_symbol} {d}"
+        vysledek = round(eval(vyraz_pro_vypocty), 2)
+    else:
         if symbol == "/":
             vysledek = c if "desetina" not in typ else round(c / 10, 2)
         else:
             vysledek = round(OPS[symbol](a, b), 2)
-
-        if second_symbol:
-            if second_symbol == "+":
-                vysledek += d
-            elif second_symbol == "-":
-                vysledek -= d
-            elif second_symbol == "*":
-                vysledek *= d
-            elif second_symbol == "/":
-                vysledek /= d
-            vysledek = round(vysledek, 2)
-
-    return {"priklad": priklad, "vysledek": vysledek}
+    zobrazeny_priklad = priklad.replace(".", ",")
+    return {"priklad": zobrazeny_priklad, "vysledek": vysledek}
 
 
 def generuj_slovni(a, b, symbol):
@@ -182,24 +170,27 @@ def generuj_slovni(a, b, symbol):
     if symbol != "/":
         priklad += f", kolik má {vec_na_vypis}?"
 
+    vysledek = round(OPS[symbol](a, b), 2)
+
+    return priklad, vysledek
+
+
 def generuj_slovni_desetinne(a, b, symbol):
     jmeno = random.choice(list_jmen)
     priklad = ""
     priklad += jmeno + " má "
     vaha = random.choice(list_vah)
     vaha_slova = "kilogramů" if vaha == "kg" else "gramů"
+    vec = random.choice(list_veci_5)
     if symbol == "*":
         b = random.randint(2, 9)
         if b < 5:
             balik = random.choice(balicky_4)
         else:
             balik = random.choice(balicky_5)
-        priklad += f"{b} {balik}"
+        priklad += f"{b} {balik} a v každém je {a}{vaha} {vec}, kolik {vaha_slova} {vec} je v {b} {balik}"
     else:
-        priklad += f"{a} {vaha}"
-    vec = random.choice(list_veci_5)
-
-    vec
+        priklad += f"{a}{vaha} "
 
     if symbol == "+":
         priklad += f"{vec} a dostal dalších {b}{vaha} "
@@ -207,9 +198,8 @@ def generuj_slovni_desetinne(a, b, symbol):
         sloveso = random.choice(list_slovesa)
         priklad += f"{vec}, ale {sloveso} {b}{vaha} "
 
-    elif symbol == "*":
-        priklad += f" a v každém je {a}{vaha} {vec}, kolik {vaha_slova} {vec} je v {b} {balik}"
-    else:
+    elif symbol == "/":
+        b = random.randint(2, 9)
         balicek = random.choice(balicky_5)
         balicek_1 = balicky_1[balicky_5.index(balicek)]
         if b < 5:
@@ -217,7 +207,7 @@ def generuj_slovni_desetinne(a, b, symbol):
         priklad += (
             f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
         )
-    if symbol != "/" or symbol != "*":
+    if symbol != "/" and symbol != "*":
         priklad += f", kolik má {vaha_slova} {vec}?"
 
     vysledek = round(OPS[symbol](a, b), 2) if symbol != "/" else a / b

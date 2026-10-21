@@ -27,7 +27,16 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
             else if(typ_print == 3){
                 document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Ahoj´ a na další řádek ´Mám se dobře´"
             }
-
+            else if(typ_print == 4){
+                document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Nejsem´ a na další řádek ´Robot´"
+            }
+            else if(typ_print == 5){
+                document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Python´ a na další řádek ´Je programovací jazyk´"
+            }
+            else{
+                document.getElementById("test_program").style.display = "none";
+                document.getElementById("python_1").style.display = "block";
+            }
             
            
 
@@ -48,7 +57,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
 
     function rada(){
         if (aktivniTypTestu == "print"){
-            if (typ_print == 3){
+            if (typ_print < 4){
                 document.getElementById("text_rada").textContent = "Vzpomeň si že ukazujeme text funkcí print() a každý nový print píše na nový řádek"
             }
             else{
@@ -113,6 +122,11 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
 
     function python_1() {
       document.getElementById("programovani").style.display = "none";
+      document.getElementById("python_1_print").style.display = "none";
+      document.getElementById("python_1_typy").style.display = "none";
+      document.getElementById("python_1_operace").style.display = "none";
+      document.getElementById("python_1_podminky").style.display = "none";
+      document.getElementById("test_program").style.display = "none";
       document.getElementById("python_1").style.display = "block";
       document.getElementById("test_program").style.display = "none";
       window.scrollTo(0, 0);
@@ -294,12 +308,12 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     }
     
     async function odpoved(){
-        const odpoved_uzivatele = document.getElementById("odpoved").value.trim();
+        let odpoved_uzivatele = document.getElementById("odpoved").value.trim().replace(',', '.');
         document.getElementById("odpoved").value = ""
 
         document.getElementById("obraz_vysledek").style.display = "block";
         document.getElementById("generovani").style.display ="none";
-        if (vysledek == odpoved_uzivatele){
+        if (Number(vysledek) === Number(odpoved_uzivatele)){
             
             document.getElementById("kontrola").textContent = "Správně 🥳";
             document.getElementById("vysledek").textContent = "";
@@ -309,7 +323,8 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
         }
         else{
             document.getElementById("kontrola").textContent = "Špatně ❌";
-            document.getElementById("vysledek").textContent = "Výsledek byl " + vysledek;
+            let vysledek_cesky = vysledek.toString().replace('.', ',');
+            document.getElementById("vysledek").textContent = "Výsledek byl " + vysledek_cesky;
         }
     }
     async function generuj_priklad(argument){
