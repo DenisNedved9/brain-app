@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BrainApp</title>
 
+
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+  
   <link rel="stylesheet" href="style.css"> <!-- css -->
 
 </head>
@@ -154,6 +159,12 @@ print("Ahoj jak se máš?")    # 2. možnost (jeden text)</textarea>
       <input type="text" id="odpoved_print" placeholder="Napiš odpověď...">
       <buttonodpoved onclick="kontrola_odpovedi_print(document.getElementById('odpoved_print').value)">Odeslat!</buttonodpoved>
       <h2 id="kontrola_print"></h2>
+
+      <hr><br>
+
+      <button onclick="prejit_na_test('print')">Delší test na psaní -></button>
+
+      
       
       <br><hr><br><br>
       <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
@@ -161,6 +172,24 @@ print("Ahoj jak se máš?")    # 2. možnost (jeden text)</textarea>
       <button onclick="python_1_typy()">Další lekce</button>
 
   </div>
+  <div id="test_program" style="display: none;">
+      <p class="p2" id="zadani"></p>
+      <textarea id="uzivatelsky_kod" rows="6" cols="50" spellcheck="false"></textarea>
+      <br>
+      <button id="tlacitko_otestovat" py-click="test_kodu" data-typ="print">Otestovat kód!</button>
+      <hr>
+      <p class="p2">Output:</p>
+      <textarea class="console-output" id="kod_output" rows="2" cols="30" readonly></textarea>
+      <h3 id="test_program_text"></h3>
+      <br>
+      <button onclick="rada()">Ukázat radu!</button>
+      <h3 id="text_rada"></h3>
+      <br>
+      <button onclick="python_1()">Zpět na lekce</button>
+      <button onclick="prejit_na_test('print')">Další zkouška na print</button>
+
+  </div>
+
 
   <div id="python_1_typy" style="display: none;">
     <h1>📦 Datové typy a Input</h1>
@@ -327,7 +356,7 @@ print((a + b) * 2)
     <br><hr><br><br>
     <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
     <br><br>
-    <button onclick="python_1_operace()">Další lekce</button>
+    <button onclick="python_1_podminky()">Další lekce</button>
 </div>
 
 
@@ -337,6 +366,40 @@ print((a + b) * 2)
     <p class="p2">
       V Pythonu můžeme používat podmínky, které nám umožňují rozhodovat, co se má stát v závislosti na určitém stavu.
     </p>
+      <textarea class="code-box" rows="7" cols="42" readonly>vek = input("kolik ti je?")
+if vek > 18:
+    print("je ti nad 18 let")
+else:
+    print("je ti méně než 18 let")</textarea>
+        <p class="p2">
+          💬 <strong>Co znamená tento kód?</strong><br>
+          Tento kód vypíše <strong>je ti nad 18 let</strong> pokud uživatel zadá větší věk než 18 let a 
+          <strong>je ti méně než 18 let</strong> pokud uživatel zadá věk menší než 18 let.
+          <br>
+          když chceme něco porovnat napíšeme if a naší podmínku, pokud to není pravda můžeme napsat elif a podmínku
+          ,elif je to samé jako if ale porovná tu podmínku jen pokud to 1. if nebo elif předtím není pravda
+          , pokud žádné if ani elif není pravda tak můžeme napsat else, který se vykoná pokud všechny podmínky if a elif nejsou pravdivé.
+          například:
+        </p>
+        <textarea class="code-box" rows="15" cols="55" readonly>hodnoceni = input("jaké je tvé hodnocení? (1 - 5)")
+if hodnoceni == 1:
+  print("nejlepší")
+elif hodnoceni == 2:
+  print("skoro nejlepší")
+elif hodnoceni == 3:
+  print("průměr")
+elif hodnoceni == 4:
+  print("špatné")
+elif hodnoceni == 5:
+  print("nejhorší")
+else:
+  print("neznámé hodnocení")</textarea>
+
+  <p class="p2">
+    💬 <strong>Co znamená tento kód?</strong><br>
+    Tento kód nám vypíše podle toho jaké hodnocení uživatel zadal, jak dobrá je známka, pokud nezadá nic od 1 do 5
+    , tak nám vypíše <strong>neznámé hodnocení.</strong>, vždy po if a zadání podmínky dáme dvojtečku <strong>:</strong>
+    a na následující řádky dáme tab aby kód věděl že to poběží když je ten if pravdivý.
     
 
   </div>
@@ -374,14 +437,17 @@ print((a + b) * 2)
     <button onclick="generuj_priklad(null)">Další příklad!</button>
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
   </div>
+  
   <div id="konec_testu" style="display: none;">
     <br>
-    <h1 id="konec_testu">Konec testu!</h1>
+    <h1 id="konec_testu_text">Konec testu!</h1>
     <h2 id="vysledek_testu"></h2>
     <button onclick="jdi_zpet_hlavni_menu()">← Zpět do menu</button>
-  
+  </div>
  
   <script src="script.js"></script> <!-- javascript -->
+
+  <script type="py" src="pyscript.py"></script>
 
 
 </body>

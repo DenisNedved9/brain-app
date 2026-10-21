@@ -5,10 +5,63 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     let vybrane_cviceni = ""
     let vysledek = 0
     let pocet_prikladu = 0
-    let pocet_potreba = 10
+    let pocet_potreba = 1
     let druh = "null"
     let pocet_dobre = 0
-    // Přepínání obrazovek
+    let aktivniTypTestu = ""
+    let typ_print = 0
+
+    function prejit_na_test(typ){
+        aktivniTypTestu = typ;
+        document.getElementById("uzivatelsky_kod").textContent = ""
+        document.getElementById("kod_output").textContent = ""
+        document.getElementById("text_rada").textContent = ""
+        if (typ == "print"){
+            typ_print += 1
+            if (typ_print == 1){
+                document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Ahoj světe´"
+            }
+            else if(typ_print == 2){
+                document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Python je skvělý´"
+            }
+            else if(typ_print == 3){
+                document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Ahoj´ a na další řádek ´Mám se dobře´"
+            }
+
+            
+           
+
+
+        }
+        
+            
+        
+
+        const tlacitkoTestu = document.getElementById("tlacitko_otestovat");
+        if (tlacitkoTestu) {
+            tlacitkoTestu.setAttribute("data-typ", aktivniTypTestu + typ_print.toString());
+        }
+
+        document.getElementById("python_1_print").style.display = "none";
+        document.getElementById("test_program").style.display = "block";
+    }
+
+    function rada(){
+        if (aktivniTypTestu == "print"){
+            if (typ_print == 3){
+                document.getElementById("text_rada").textContent = "Vzpomeň si že ukazujeme text funkcí print() a každý nový print píše na nový řádek"
+            }
+            else{
+                document.getElementById("text_rada").textContent = "Vzpomeň si že ukazujeme text funkcí print()";
+            }
+            
+        }
+        else{
+            document.getElementById("text_rada").textContent = "neexistuje";
+        }
+        
+    }
+
     function otevri_matika() {
       document.getElementById("hlavni_menu").style.display = "none";
       document.getElementById("matika").style.display = "block";
@@ -61,6 +114,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     function python_1() {
       document.getElementById("programovani").style.display = "none";
       document.getElementById("python_1").style.display = "block";
+      document.getElementById("test_program").style.display = "none";
       window.scrollTo(0, 0);
     }
     function python_1_print() {
@@ -112,6 +166,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
       document.getElementById("logicka_uloha").style.display = "none";
       document.getElementById("iq_uloha").style.display = "none";
       document.getElementById("konec_testu").style.display = "none";
+
     }
 
     
