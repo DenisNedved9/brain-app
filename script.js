@@ -13,6 +13,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
 
     function prejit_na_test(typ){
         aktivniTypTestu = typ;
+        document.getElementById("python_1_typy").style.display = "none";
         document.getElementById("uzivatelsky_kod").textContent = ""
         document.getElementById("kod_output").textContent = ""
         document.getElementById("text_rada").textContent = ""
@@ -34,15 +35,25 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
                 document.getElementById("zadani").textContent = "Zkus si napsat kód který vytiskne ´Python´ a na další řádek ´Je programovací jazyk´"
             }
             else{
+                typ_print = 0
                 document.getElementById("test_program").style.display = "none";
                 document.getElementById("python_1").style.display = "block";
             }
-            
-           
-
-
         }
-        
+        else if (typ == "typy"){
+          typ_print += 1
+          if (typ_print == 1){
+              document.getElementById("zadani").textContent = "Napiš kód kde: zadám číslo (pomocí input) a ty pak vypíšeš ´Tvé číslo je: ´ a následně to číslo co jsme napsali."
+          }
+          else if (typ_print == 2){
+              document.getElementById("zadani").textContent = "Napiš kód kde: zadám slovo (pomocí input) a ty pak vypíšeš ´Tvé slovo je: ´ a následně to slovo co jsme napsali."
+          }
+          else{
+              typ_print = 0
+              document.getElementById("test_program").style.display = "none";
+              document.getElementById("python_1").style.display = "block";
+          }
+        }
             
         
 
@@ -121,6 +132,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     }
 
     function python_1() {
+      typ_print = 0
       document.getElementById("programovani").style.display = "none";
       document.getElementById("python_1_print").style.display = "none";
       document.getElementById("python_1_typy").style.display = "none";
