@@ -11,6 +11,11 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
     let aktivniTypTestu = ""
     let typ_print = 0
 
+
+    function dalsi_zkouska() {
+        prejit_na_test(aktivniTypTestu);
+    }
+
     function prejit_na_test(typ){
         aktivniTypTestu = typ;
         document.getElementById("python_1_typy").style.display = "none";
@@ -38,6 +43,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
                 typ_print = 0
                 document.getElementById("test_program").style.display = "none";
                 document.getElementById("python_1").style.display = "block";
+                return
             }
         }
         else if (typ == "typy"){
@@ -52,6 +58,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
               typ_print = 0
               document.getElementById("test_program").style.display = "none";
               document.getElementById("python_1").style.display = "block";
+              return
           }
         }
             

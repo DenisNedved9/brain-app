@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from decimal import Decimal
 import random
 import operator
 
@@ -125,7 +126,16 @@ balicky_po_do = [
     "kufrů",
     "tašek",
 ]
-
+balicky_v = [
+    "pytlích",
+    "balících",
+    "krabicích",
+    "koších",
+    "sáčcích",
+    "boxech",
+    "kufrech",
+    "taškách",
+]
 def generuj_cisla():
     c = 0
     d = None
@@ -279,38 +289,53 @@ def generuj_slovni(a, b, symbol):
 
 def generuj_slovni_desetinne(a, b, symbol):
     jmeno = random.choice(list_jmen)
-    priklad = ""
-    priklad += jmeno + " má "
     vaha = random.choice(list_vah)
     vaha_slova = "kilogramů" if vaha == "kg" else "gramů"
     vec = random.choice(list_veci_5)
+
+    if symbol == "/":
+        while True:
+            b = random.randint(2, 9)
+            vysledek = Decimal(str(a)) / Decimal(b)
+
+            
+            if vysledek == vysledek.quantize(Decimal("0.01")):  # Pokud by výsledek měl více než dvě desetinná místa vygenerujeme znovu, dokud nenajdeme vhodný výsledek
+                break
+
+        index_balicku = random.randrange(len(balicky_po_do))
+        balicek_po_do = balicky_po_do[index_balicku]
+        balicek_v_jednom = balicky_1[index_balicku]
+
+        priklad = (
+            f"{jmeno} má {a}{vaha} {vec} a rozdělil je do "
+            f"{b} {balicek_po_do}, kolik {vec} je v 1 "
+            f"{balicek_v_jednom}?"
+        )
+
+        return priklad, float(vysledek)
+
+    priklad = f"{jmeno} má {a}{vaha} "
+
     if symbol == "*":
         b = random.randint(2, 9)
-        if b < 5:
-            balik = random.choice(balicky_4)
-        else:
-            balik = random.choice(balicky_5)
-        priklad += f"{b} {balik} a v každém je {a}{vaha} {vec}, kolik {vaha_slova} {vec} je v {b} {balik}"
-    else:
-        priklad += f"{a}{vaha} "
+        index_balicku = random.randrange(len(balicky_v))
+        balicek_v = balicky_v[index_balicku]
 
-    if symbol == "+":
-        priklad += f"{vec} a dostal dalších {b}{vaha} "
+        priklad += (
+            f"{b} {balicky_4[index_balicku]} a v každém je "
+            f"{a}{vaha} {vec}, kolik {vaha_slova} {vec} je v "
+            f"{b} {balicek_v}?"
+        )
+
+    elif symbol == "+":
+        priklad += f"{vec} a dostal dalších {b}{vaha}, "
+        priklad += f"kolik má {vaha_slova} {vec}?"
+
     elif symbol == "-":
         sloveso = random.choice(list_slovesa)
-        priklad += f"{vec}, ale {sloveso} {b}{vaha} "
+        priklad += f"{vec}, ale {sloveso} {b}{vaha}, "
+        priklad += f"kolik má {vaha_slova} {vec}?"
 
-    elif symbol == "/":
-        b = random.randint(2, 9)
-        balicek = random.choice(balicky_5)
-        balicek_1 = balicky_1[balicky_5.index(balicek)]
-        if b < 5:
-            balicek = balicky_4[balicky_5.index(balicek)]
-        priklad += (
-            f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
-        )
-    if symbol != "/" and symbol != "*":
-        priklad += f", kolik má {vaha_slova} {vec}?"
+    vysledek = OPS[symbol](a, b)
 
-    vysledek = round(OPS[symbol](a, b), 2) if symbol != "/" else a / b
-    return priklad, vysledek
+    return priklad, round(vysledek, 2)
