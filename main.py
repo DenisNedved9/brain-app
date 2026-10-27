@@ -16,15 +16,115 @@ app.add_middleware(
 OPS = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
 symbol_list = ["+", "-", "*", "/"]
 
-list_jmen = ["Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan"]
-list_veci_4 = ["jablka", "brambory", "tužky"]
-list_veci_5 = ["jablek", "brambor", "tužek"]
-list_slovesa = ["vzali mu", "přišel o", "ukradli mu"]
-balicky_5 = ["pytlů", "balíků", "skupin"]
-balicky_4 = ["pytle", "balíky", "skupiny"]
-balicky_1 = ["pytli", "balíku", "skupině"]
+list_jmen = [
+    "Pepa", "Luboš", "Ondra", "Miloš", "Honza", "Jan",
+    "Tomáš", "Matěj", "David", "Jakub", "Martin", "Filip",
+    "Adam", "Patrik", "Vojta", "Kuba", "Radek", "Michal",
+    "Lukáš", "Karel", "Daniel", "Šimon", "Dominik", "Erik"
+]
+list_veci_4 = [
+    "jablka",
+    "brambory",
+    "tužky",
+    "sešity",
+    "míče",
+    "bonbony",
+    "pomeranče",
+    "sušenky",
+    "balónky",
+    "knížky",
+    "kameny",
+    "korálky",
+    "pastelky",
+    "samolepky",
+    "autíčka",
+    "kostičky",
+    "pomeranče",
+    "rohlíky",
+    "piškoty",
+    "jahody",
+    "hrušky",
+    "mrkve",
+    "pomeranče",
+    "dorty",
+]
+list_veci_5 = [
+    "jablek",
+    "brambor",
+    "tužek",
+    "sešitů",
+    "míčů",
+    "bonbonů",
+    "pomerančů",
+    "sušenek",
+    "balónků",
+    "knížek",
+    "kamenů",
+    "korálků",
+    "pastelek",
+    "samolepek",
+    "autíček",
+    "kostiček",
+    "pomerančů",
+    "rohlíků",
+    "piškotů",
+    "jahod",
+    "hrušek",
+    "mrkví",
+    "pomerančů",
+    "dortů",
+]
+list_slovesa = [
+    "přišel o",
+    "ztratil",
+    "odevzdal",
+    "rozdal",
+    "spotřeboval",
+    "vypotřeboval",
+    "odečetli mu",
+    "vzali mu",
+]
+balicky_5 = [
+    "pytlů",
+    "balíků",
+    "krabic",
+    "košů",
+    "sáčků",
+    "boxů",
+    "kufrů",
+    "tašek",
+]
+balicky_4 = [
+    "pytle",
+    "balíky",
+    "krabice",
+    "koše",
+    "sáčky",
+    "boxy",
+    "kufry",
+    "tašky",
+]
+balicky_1 = [
+    "pytli",
+    "balíku",
+    "krabici",
+    "koši",
+    "sáčku",
+    "boxu",
+    "kufru",
+    "tašce",
+]
 list_vah = ["kg", "g"]
-
+balicky_po_do = [
+    "pytlů",
+    "balíků",
+    "krabic",
+    "košů",
+    "sáčků",
+    "boxů",
+    "kufrů",
+    "tašek",
+]
 
 def generuj_cisla():
     c = 0
@@ -160,13 +260,15 @@ def generuj_slovni(a, b, symbol):
         else:
             priklad += f"{balicek} a v každém je {a} {vec}"
     else:
-        balicek = random.choice(balicky_5)
-        balicek_1 = balicky_1[balicky_5.index(balicek)]
-        if b < 5:
-            balicek = balicky_4[balicky_5.index(balicek)]
+        index_balicku = random.randrange(len(balicky_po_do))
+        balicek = balicky_po_do[index_balicku]
+        balicek_1 = balicky_1[index_balicku]
+
         priklad += (
-            f"{vec} a rozdělil je do {b} {balicek}, kolik {vec} je v 1 {balicek_1}"
+            f"{vec} a rozdělil je do {b} {balicek}, "
+            f"kolik {vec} je v 1 {balicek_1}"
         )
+    
     if symbol != "/":
         priklad += f", kolik má {vec_na_vypis}?"
 
