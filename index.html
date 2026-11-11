@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
   <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+  <script type="py" src="main.py"></script>
 
   
   <link rel="stylesheet" href="style.css">
@@ -180,7 +181,7 @@ print("Ahoj jak se máš?")    # 2. možnost (jeden text)</textarea>
       <hr>
       <p class="p2">Output:</p>
       <textarea class="console-output" id="kod_output" rows="2" cols="30" readonly></textarea>
-      <h3 id="test_program_text"></h3>
+      <h2 id="test_program_text"></h2> <!-- zde se vypíše 'správně' či 'špatně' -->
       <br>
       <button onclick="rada()">Ukázat radu!</button>
       <h3 id="text_rada"></h3>
@@ -365,45 +366,54 @@ print((a + b) * 2)
   <div id="python_1_podminky" style="display: none;">
     <h1>Podmínky</h1>
     <hr>
+    
     <p class="p2">
-      V Pythonu můžeme používat podmínky, které nám umožňují rozhodovat, co se má stát v závislosti na určitém stavu.
+      Podmínky nám umožňují rozhodovat, co se má v programu stát v závislosti na určitém stavu.
     </p>
-      <textarea class="code-box" rows="7" cols="42" readonly>vek = input("kolik ti je?")
+
+    <h2>Základní podmínka (if / else)</h2>
+    <textarea class="code-box" rows="7" cols="42" readonly>vek = input("kolik ti je?")
 if vek > 18:
     print("je ti nad 18 let")
 else:
     print("je ti méně než 18 let")</textarea>
-        <p class="p2">
-          💬 <strong>Co znamená tento kód?</strong><br>
-          Tento kód vypíše <strong>je ti nad 18 let</strong> pokud uživatel zadá větší věk než 18 let a 
-          <strong>je ti méně než 18 let</strong> pokud uživatel zadá věk menší než 18 let.
-          <br>
-          když chceme něco porovnat napíšeme if a naší podmínku, pokud to není pravda můžeme napsat elif a podmínku
-          ,elif je to samé jako if ale porovná tu podmínku jen pokud to 1. if nebo elif předtím není pravda
-          , pokud žádné if ani elif není pravda tak můžeme napsat else, který se vykoná pokud všechny podmínky if a elif nejsou pravdivé.
-          například:
-        </p>
-        <textarea class="code-box" rows="15" cols="55" readonly>hodnoceni = input("jaké je tvé hodnocení? (1 - 5)")
-if hodnoceni == 1:
-  print("nejlepší")
-elif hodnoceni == 2:
-  print("skoro nejlepší")
-elif hodnoceni == 3:
-  print("průměr")
-elif hodnoceni == 4:
-  print("špatné")
-elif hodnoceni == 5:
-  print("nejhorší")
-else:
-  print("neznámé hodnocení")</textarea>
-
-  <p class="p2">
-    💬 <strong>Co znamená tento kód?</strong><br>
-    Tento kód nám vypíše podle toho jaké hodnocení uživatel zadal, jak dobrá je známka, pokud nezadá nic od 1 do 5
-    , tak nám vypíše <strong>neznámé hodnocení.</strong>, vždy po if a zadání podmínky dáme dvojtečku <strong>:</strong>
-    a na následující řádky dáme tab aby kód věděl že to poběží když je ten if pravdivý.
     
+    <p class="p2">
+      • Za příkaz <code>if</code> nebo <code>else</code> musíme vždy napsat dvojtečku <strong>:</strong>.<br>
+      • Řádky pod podmínkou musí být odsazené (pomocí tabulátoru), aby kód věděl, co se má vykonat.
+    </p>
 
+    <hr>
+    <h2>Víc možností (elif)</h2>
+    <p class="p2">
+      Když chceme otestovat více variant za sebou, použijeme <code>elif</code> (funguje jako „jinak, pokud“):
+    </p>
+    
+    <textarea class="code-box" rows="11" cols="45" readonly>hodnoceni = input("Zadej známku (1-5): ")
+if hodnoceni == 1:
+    print("Nejlepší")
+elif hodnoceni == 3:
+    print("Průměr")
+else:
+    print("Jiná známka")</textarea>
+
+    <hr>
+    <h2>Logické operátory (and, or)</h2>
+    <p class="p2">
+      Pro ověření více podmínek najednou používáme klíčová slova:
+    </p>
+    <ul class="p2">
+      <strong>and</strong> – platí, pouze pokud jsou pravdivé <em>obě</em> podmínky současně.<br>
+      <strong>or</strong> – platí, pokud je pravdivá alespoň <em>jedna</em> z podmínek.
+    </ul>
+
+    <textarea class="code-box" rows="5" cols="40" readonly>vek = 20
+vstupenka = True
+if vek >= 18 and vstupenka:
+    print("Můžeš dál")</textarea>
+
+  <br><hr><br><br>
+  <button onclick="jdi_zpet_programovani_zaklad()">← Zpět do lekce Python - základní funkce</button>
   </div>
 
 
