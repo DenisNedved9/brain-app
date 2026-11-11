@@ -117,24 +117,30 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
       const vysledek = document.getElementById("kontrola_print");
       if (odpoved === "Ahoj toto je test") {
         vysledek.textContent = "Správně!";
+        vysledek.style.color = "#00ff66";
       } else {
         vysledek.textContent = "Nesprávně!";
+        vysledek.style.color = "#ff7b54";
       }
     }
     function kontrola_odpovedi_typy(odpoved) {
       const vysledek = document.getElementById("kontrola_typy");
       if (odpoved === "toto je test") {
         vysledek.textContent = "Správně!";
+        vysledek.style.color = "#00ff66";
       } else {
         vysledek.textContent = "Nesprávně!";
+        vysledek.style.color = "#ff7b54";
       }
     }
     function kontrola_odpovedi_operace(odpoved) {
       const vysledek = document.getElementById("kontrola_operace");
       if (odpoved === "22") {
         vysledek.textContent = "Správně!";
+        vysledek.style.color = "#00ff66";
       } else {
         vysledek.textContent = "Nesprávně!";
+        vysledek.style.color = "#ff7b54";
       }
     }
 
@@ -335,6 +341,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
         if (Number(vysledek) === Number(odpoved_uzivatele)){
             
             document.getElementById("kontrola").textContent = "Správně 🥳";
+            document.getElementById("kontrola").style.color = "#00ff66";
             document.getElementById("vysledek").textContent = "";
             if (druh == "test"){
                 pocet_dobre++;
@@ -342,6 +349,7 @@ const BACKEND_URL = "http://127.0.0.1:8000"; //local adresa
         }
         else{
             document.getElementById("kontrola").textContent = "Špatně ❌";
+            document.getElementById("kontrola").style.color = "#ff7b54";
             let vysledek_cesky = vysledek.toString().replace('.', ',');
             document.getElementById("vysledek").textContent = "Výsledek byl " + vysledek_cesky;
         }

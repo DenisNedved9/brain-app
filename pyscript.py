@@ -90,17 +90,17 @@ def test_kodu(event):
     finally:
         sys.stdout = stare_stdout
 
+    el = document.getElementById("test_program_text")
+
+
     if vsechny_testy_prosly:
-        document.getElementById(
-            "test_program_text"
-        ).textContent = "Správně"
+        el.textContent = "Správně"
+        el.style.color = "#00ff66"
     elif chyba:
-        document.getElementById(
-            "test_program_text"
-        ).textContent = chyba
+        el.textContent = chyba
+        el.style.color = "#ff7b54"
     else:
-        document.getElementById(
-            "test_program_text"
-        ).textContent = "Špatně"
+        el.textContent = "Špatně"
+        el.style.color = "#ff7b54"
 
     document.getElementById("kod_output").value = "\n---\n".join(vystupy)
